@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TerraBean — Grown, Roasted & Brewed by Us</title>
+  <meta name="description" content="TerraBean is a local cafe that grows its own coffee beans. Explore our farm-to-cup journey in a playful, gamified experience." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Gamified HUD -->
+  <header class="hud" id="hud">
+    <a href="#hero" class="hud__brand">
+      <span class="hud__bean" aria-hidden="true">●</span>
+      TerraBean
+    </a>
+    <div class="hud__stats">
+      <div class="stat" title="Beans harvested as you scroll">
+        <span class="stat__icon" aria-hidden="true">🫘</span>
+        <span class="stat__value" id="beanCount">0</span>
+        <span class="stat__label">beans</span>
+      </div>
+      <div class="stat stat--roast" title="Roast level">
+        <span class="stat__label">Roast</span>
+        <div class="roast-bar"><i id="roastFill"></i></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Scroll progress -->
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <!-- Achievement toast -->
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <span class="toast__badge" aria-hidden="true">★</span>
+    <div>
+      <strong class="toast__title">Achievement unlocked</strong>
+      <span class="toast__desc" id="toastDesc"></span>
+    </div>
+  </div>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="hero__beans" id="heroBeans" aria-hidden="true"></div>
+      <div class="hero__inner">
+        <p class="eyebrow reveal">Farm · Roastery · Cafe</p>
+        <h1 class="hero__title reveal">
+          We <em>grow</em> the beans<br />we brew for you.
+        </h1>
+        <p class="hero__sub reveal">
+          Every cup at TerraBean starts on our own hillside farm — hand-picked,
+          slow-roasted, and poured with care. Scroll to harvest the story.
+        </p>
+        <div class="hero__cta reveal">
+          <a href="#menu" class="btn btn--primary">Explore the Menu</a>
+          <a href="#journey" class="btn btn--ghost">The Bean Journey ↓</a>
+        </div>
+      </div>
+      <div class="hero__cup reveal" aria-hidden="true">
+        <div class="cup">
+          <div class="cup__steam"><span></span><span></span><span></span></div>
+          <div class="cup__body"></div>
+          <div class="cup__handle"></div>
+          <div class="cup__saucer"></div>
+        </div>
+      </div>
+      <div class="scroll-hint" aria-hidden="true">
+        <span>scroll</span><i></i>
+      </div>
+    </section>
+
+    <!-- JOURNEY -->
+    <section class="journey" id="journey">
+      <div class="section-head reveal">
+        <p class="eyebrow">The Bean Journey</p>
+        <h2>From our soil to your cup</h2>
+        <p class="section-note">Drag the rail, scroll, or use ← → to travel each stage. Every new stop you reach harvests beans.</p>
+      </div>
+
+      <!-- Coffee-flow focus rail (vanilla port of FocusRail) -->
+      <div class="rail reveal" id="beanRail" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Bean journey">
+        <div class="rail__ambience" id="railAmbience" aria-hidden="true"></div>
+        <div class="rail__stage" id="railStage"></div>
+        <div class="rail__footer">
+          <div class="rail__info" id="railInfo">
+            <span class="rail__meta" id="railMeta"></span>
+            <h3 class="rail__title" id="railTitle"></h3>
+            <p class="rail__desc" id="railDesc"></p>
+          </div>
+          <div class="rail__nav">
+            <button class="rail__btn" id="railPrev" aria-label="Previous stop"></button>
+            <span class="rail__count" id="railCount"></span>
+            <button class="rail__btn" id="railNext" aria-label="Next stop"></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS PARALLAX -->
+    <section class="figures" id="figures">
+      <div class="figures__grid">
+        <div class="figure reveal"><span class="figure__num" data-count="1500">0</span><span class="figure__unit">m</span><p>farm altitude</p></div>
+        <div class="figure reveal"><span class="figure__num" data-count="100">0</span><span class="figure__unit">%</span><p>single-origin</p></div>
+        <div class="figure reveal"><span class="figure__num" data-count="12">0</span><span class="figure__unit">k</span><p>cups a year</p></div>
+        <div class="figure reveal"><span class="figure__num" data-count="9">0</span><span class="figure__unit">yr</span><p>family-grown</p></div>
+      </div>
+    </section>
+
+    <!-- MENU -->
+    <section class="menu" id="menu">
+      <div class="section-head reveal">
+        <p class="eyebrow">The Menu</p>
+        <h2>Tap a cup to collect its beans</h2>
+        <p class="section-note">Each drink rewards you with beans. Collect them all.</p>
+      </div>
+      <div class="menu__grid">
+        <article class="card reveal" data-bean="10" tabindex="0">
+          <div class="card__art card__art--espresso" aria-hidden="true"></div>
+          <h3>Hillside Espresso</h3>
+          <p>Intense, syrupy shot with dark cocoa finish.</p>
+          <span class="card__price">$3.5</span>
+          <span class="card__pop" aria-hidden="true">+10 🫘</span>
+        </article>
+        <article class="card reveal" data-bean="10" tabindex="0">
+          <div class="card__art card__art--latte" aria-hidden="true"></div>
+          <h3>Canopy Latte</h3>
+          <p>Velvet microfoam over our signature roast.</p>
+          <span class="card__price">$4.5</span>
+          <span class="card__pop" aria-hidden="true">+10 🫘</span>
+        </article>
+        <article class="card reveal" data-bean="10" tabindex="0">
+          <div class="card__art card__art--cold" aria-hidden="true"></div>
+          <h3>Cold Harvest Brew</h3>
+          <p>18-hour steeped, smooth &amp; naturally sweet.</p>
+          <span class="card__price">$4.0</span>
+          <span class="card__pop" aria-hidden="true">+10 🫘</span>
+        </article>
+        <article class="card reveal" data-bean="10" tabindex="0">
+          <div class="card__art card__art--mocha" aria-hidden="true"></div>
+          <h3>Soil &amp; Cocoa Mocha</h3>
+          <p>House roast folded into single-origin chocolate.</p>
+          <span class="card__price">$5.0</span>
+          <span class="card__pop" aria-hidden="true">+10 🫘</span>
+        </article>
+      </div>
+    </section>
+
+    <!-- CTA / VISIT -->
+    <section class="visit" id="visit">
+      <div class="visit__inner reveal">
+        <h2>Come taste the hillside</h2>
+        <p>Open daily · 7am – 6pm · 14 Grove Lane, Old Mill District</p>
+        <a href="#hero" class="btn btn--primary" id="finalCta">Reserve a Table</a>
+        <p class="visit__score">Beans harvested today: <strong id="finalScore">0</strong></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© <span id="year"></span> TerraBean Cafe — grown, roasted &amp; brewed by us.</p>
+    <p class="footer__credit">A gamified farm-to-cup experience.</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="rail.js"></script>
+</body>
+</html>
