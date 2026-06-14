@@ -32,6 +32,15 @@ h1, h2, h3 { font-family: 'Fraunces', Georgia, serif; line-height: 1.05; font-we
 
 em { font-style: italic; color: var(--gold); }
 
+/* Visible focus rings for keyboard users (a11y: focus-states) */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
 section { position: relative; padding: clamp(5rem, 12vh, 9rem) clamp(1.25rem, 6vw, 6rem); }
 
 .eyebrow {
@@ -79,7 +88,20 @@ section { position: relative; padding: clamp(5rem, 12vh, 9rem) clamp(1.25rem, 6v
   display: inline-block;
   text-align: right;
 }
-.stat__icon { font-size: 1rem; }
+.stat__icon { display: inline-flex; color: var(--gold); }
+.stat__icon svg { width: 16px; height: 16px; }
+.hud__right { display: flex; align-items: center; gap: clamp(0.75rem, 3vw, 1.75rem); }
+.hud__cta {
+  padding: 0.5rem 1.1rem;
+  border-radius: 99px;
+  background: var(--gold);
+  color: var(--espresso);
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+}
+.hud__cta:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(216, 162, 94, 0.4); }
 .stat--roast { flex-direction: column; align-items: flex-start; gap: 0.2rem; }
 .stat--roast .stat__label { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; }
 .roast-bar {
@@ -523,6 +545,47 @@ section { position: relative; padding: clamp(5rem, 12vh, 9rem) clamp(1.25rem, 6v
   100% { opacity: 0; transform: translateY(-26px) scale(1); }
 }
 
+/* ---------- Social proof / testimonials ---------- */
+.proof { background: linear-gradient(180deg, var(--espresso), var(--bean)); }
+.proof__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.quote {
+  margin: 0;
+  padding: 1.75rem;
+  border-radius: 20px;
+  background: linear-gradient(160deg, rgba(111, 78, 55, 0.2), rgba(26, 15, 10, 0.5));
+  border: 1px solid rgba(176, 125, 82, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.quote__stars { display: flex; gap: 0.2rem; color: var(--gold); }
+.quote__stars svg { width: 18px; height: 18px; }
+.quote blockquote {
+  margin: 0;
+  font-family: 'Fraunces', serif;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  color: var(--foam);
+}
+.quote__by { display: flex; align-items: center; gap: 0.75rem; font-size: 0.85rem; color: var(--latte); margin-top: auto; }
+.quote__by strong { color: var(--foam); }
+.quote__avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--roast);
+  border: 1px solid rgba(216, 162, 94, 0.4);
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  color: var(--gold);
+}
+
+@media (max-width: 900px) { .proof__grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; } }
+
 /* ---------- Visit ---------- */
 .visit {
   text-align: center;
@@ -537,8 +600,9 @@ section { position: relative; padding: clamp(5rem, 12vh, 9rem) clamp(1.25rem, 6v
 .visit__score strong { color: var(--gold); font-family: 'Fraunces', serif; font-size: 1.3rem; }
 
 /* ---------- Footer ---------- */
-.footer { padding: 2.5rem; text-align: center; color: var(--mocha); font-size: 0.85rem; border-top: 1px solid rgba(176,125,82,0.15); }
-.footer__credit { margin-top: 0.35rem; color: var(--roast); }
+/* Contrast lifted to meet WCAG AA on the espresso background (a11y: color-contrast) */
+.footer { padding: 2.5rem; text-align: center; color: var(--latte); font-size: 0.85rem; border-top: 1px solid rgba(176,125,82,0.15); }
+.footer__credit { margin-top: 0.35rem; color: var(--crema); }
 
 /* ---------- Floating collected bean ---------- */
 .fly-bean {
