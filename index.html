@@ -3,231 +3,258 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TerraBean — Grown, Roasted & Brewed by Us</title>
-  <meta name="description" content="TerraBean is a local cafe that grows its own coffee beans. Explore our farm-to-cup journey in a playful, gamified experience." />
-  <meta name="theme-color" content="#1a0f0a" />
-  <!-- Social share / deep-linking (skill: deep-linking) -->
+  <title>TerraBean — Grown, Roasted &amp; Brewed by Us</title>
+  <meta name="description" content="TerraBean is a local cafe that grows its own coffee beans. Rich, aromatic coffee from our own hillside farm, roasted and poured with care." />
+  <meta name="theme-color" content="#F4EADA" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="TerraBean — Grown, Roasted & Brewed by Us" />
-  <meta property="og:description" content="A local cafe that grows its own coffee beans. Explore our farm-to-cup journey in a playful, gamified experience." />
+  <meta property="og:title" content="TerraBean — Grown, Roasted &amp; Brewed by Us" />
+  <meta property="og:description" content="A local cafe that grows, roasts, and brews its own single-origin coffee." />
   <meta property="og:url" content="https://ogcampergirl2-tech.github.io/terrabean-cafe/" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=1" />
 </head>
 <body>
-  <!-- Gamified HUD -->
-  <header class="hud" id="hud">
-    <a href="#hero" class="hud__brand">
-      <span class="hud__bean" aria-hidden="true">●</span>
-      TerraBean
-    </a>
-    <div class="hud__right">
-      <div class="hud__stats">
-        <div class="stat" title="Beans harvested as you scroll">
-          <span class="stat__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.165 6.598C9.954 7.478 9.64 8.36 9 9c-.64.64-1.521.954-2.402 1.165A6 6 0 0 0 8 22a13.96 13.96 0 0 0 9.9-4.1A6 6 0 0 0 14 6a13.96 13.96 0 0 0-3.835.598Z"/><path d="M5.341 10.62a4 4 0 1 0 5.279-5.28"/></svg></span>
-          <span class="stat__value" id="beanCount">0</span>
-          <span class="stat__label">beans</span>
-        </div>
-        <div class="stat stat--roast" title="Roast level">
-          <span class="stat__label">Roast</span>
-          <div class="roast-bar"><i id="roastFill"></i></div>
-        </div>
-      </div>
-      <a href="#visit" class="hud__cta">Reserve</a>
-    </div>
-  </header>
 
-  <!-- Scroll progress -->
-  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
-
-  <!-- Achievement toast -->
-  <div class="toast" id="toast" role="status" aria-live="polite">
-    <span class="toast__badge" aria-hidden="true">★</span>
-    <div>
-      <strong class="toast__title">Achievement unlocked</strong>
-      <span class="toast__desc" id="toastDesc"></span>
+  <!-- PRELOADER -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader__inner">
+      <div class="bean"></div>
+      <p class="preloader__brand">TerraBean</p>
+      <div class="preloader__bar"><i></i></div>
     </div>
   </div>
 
+  <!-- NAV -->
+  <header class="nav" id="nav">
+    <a href="#home" class="brand"><span class="brand__bean" aria-hidden="true"></span> TerraBean</a>
+    <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#home">Home</a>
+      <a href="#menu">Menu</a>
+      <a href="#flavours">Flavours</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#visit">Visit</a>
+    </nav>
+    <a href="#visit" class="btn btn--primary nav__cta">Reserve a table</a>
+  </header>
+
   <main>
     <!-- HERO -->
-    <section class="hero" id="hero">
-      <div class="hero__beans" id="heroBeans" aria-hidden="true"></div>
-      <div class="hero__inner">
-        <p class="eyebrow reveal">Farm · Roastery · Cafe</p>
-        <h1 class="hero__title reveal">
-          We <em>grow</em> the beans<br />we brew for you.
-        </h1>
-        <p class="hero__sub reveal">
-          Every cup at TerraBean starts on our own hillside farm — hand-picked,
-          slow-roasted, and poured with care. Scroll to harvest the story.
-        </p>
-        <div class="hero__cta reveal">
-          <a href="#menu" class="btn btn--primary">Explore the Menu</a>
-          <a href="#journey" class="btn btn--ghost">The Bean Journey ↓</a>
-        </div>
-      </div>
-      <div class="hero__cup reveal" aria-hidden="true">
-        <div class="cup">
-          <div class="cup__steam"><span></span><span></span><span></span></div>
-          <div class="cup__body"></div>
-          <div class="cup__handle"></div>
-          <div class="cup__saucer"></div>
-        </div>
-      </div>
-      <div class="scroll-hint" aria-hidden="true">
-        <span>scroll</span><i></i>
-      </div>
-    </section>
-
-    <!-- JOURNEY -->
-    <section class="journey" id="journey">
-      <div class="section-head reveal">
-        <p class="eyebrow">The Bean Journey</p>
-        <h2>From our soil to your cup</h2>
-        <p class="section-note">Drag the rail, scroll, or use ← → to travel each stage. Every new stop you reach harvests beans.</p>
-      </div>
-
-      <!-- Coffee-flow focus rail (vanilla port of FocusRail) -->
-      <div class="rail reveal" id="beanRail" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Bean journey">
-        <div class="rail__ambience" id="railAmbience" aria-hidden="true"></div>
-        <div class="rail__stage" id="railStage"></div>
-        <div class="rail__footer">
-          <div class="rail__info" id="railInfo">
-            <span class="rail__meta" id="railMeta"></span>
-            <h3 class="rail__title" id="railTitle"></h3>
-            <p class="rail__desc" id="railDesc"></p>
+    <section class="hero" id="home">
+      <div class="wrap hero__grid">
+        <div>
+          <span class="eyebrow reveal">Farm · Roastery · Cafe</span>
+          <h1 class="reveal">Coffee we <em>grow</em>, roast, and pour.</h1>
+          <p class="hero__sub reveal">Every TerraBean cup starts on our own hillside farm: hand-picked, slow-roasted in small batches, and poured with care by people who know your order.</p>
+          <div class="hero__cta reveal">
+            <a href="#menu" class="btn btn--primary">Explore the menu</a>
+            <a href="#flavours" class="btn btn--ghost">Shop the beans</a>
           </div>
-          <div class="rail__nav">
-            <button class="rail__btn" id="railPrev" aria-label="Previous stop"></button>
-            <span class="rail__count" id="railCount"></span>
-            <button class="rail__btn" id="railNext" aria-label="Next stop"></button>
+          <div class="hero__stats reveal">
+            <div class="hstat"><div class="hstat__num"><span data-count="20">0</span><span class="u">+</span></div><p>house flavours</p></div>
+            <div class="hstat"><div class="hstat__num"><span data-count="15">0</span><span class="u">k+</span></div><p>cups poured</p></div>
+            <div class="hstat"><div class="hstat__num"><span data-count="9">0</span><span class="u">yr</span></div><p>family-grown</p></div>
+          </div>
+        </div>
+
+        <div class="hero__product reveal" aria-hidden="true">
+          <div class="disc"></div>
+          <i class="bean-float b1"></i>
+          <i class="bean-float b2"></i>
+          <i class="bean-float b3"></i>
+          <div class="cup">
+            <div class="cup__steam"><span></span><span></span><span></span></div>
+            <div class="cup__lid"></div>
+            <div class="cup__body">
+              <span class="cup__mark"></span>
+              <span class="cup__word">TERRA<small>BEAN</small></span>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- STATS PARALLAX -->
-    <section class="figures" id="figures">
-      <div class="figures__grid">
-        <div class="figure reveal"><span class="figure__num" data-count="1500">0</span><span class="figure__unit">m</span><p>farm altitude</p></div>
-        <div class="figure reveal"><span class="figure__num" data-count="100">0</span><span class="figure__unit">%</span><p>single-origin</p></div>
-        <div class="figure reveal"><span class="figure__num" data-count="12">0</span><span class="figure__unit">k</span><p>cups a year</p></div>
-        <div class="figure reveal"><span class="figure__num" data-count="9">0</span><span class="figure__unit">yr</span><p>family-grown</p></div>
+    <!-- MARQUEE -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>Farm to cup</span><span class="dot">✦</span>
+        <span>Single origin</span><span class="dot">✦</span>
+        <span>Slow roasted</span><span class="dot">✦</span>
+        <span>Hand picked</span><span class="dot">✦</span>
+        <span>Family grown</span><span class="dot">✦</span>
+        <span>Farm to cup</span><span class="dot">✦</span>
+        <span>Single origin</span><span class="dot">✦</span>
+        <span>Slow roasted</span><span class="dot">✦</span>
+        <span>Hand picked</span><span class="dot">✦</span>
+        <span>Family grown</span><span class="dot">✦</span>
       </div>
-    </section>
+    </div>
 
     <!-- MENU -->
-    <section class="menu" id="menu">
-      <div class="section-head reveal">
-        <p class="eyebrow">The Menu</p>
-        <h2>Tap a cup to collect its beans</h2>
-        <p class="section-note">Each drink rewards you with beans. Collect them all.</p>
-      </div>
-      <div class="menu__grid">
-        <article class="card reveal" data-bean="10" tabindex="0">
-          <div class="card__art card__art--espresso" aria-hidden="true"></div>
-          <h3>Hillside Espresso</h3>
-          <p>Intense, syrupy shot with dark cocoa finish.</p>
-          <span class="card__price">$3.5</span>
-          <span class="card__pop" aria-hidden="true">+10 🫘</span>
-        </article>
-        <article class="card reveal" data-bean="10" tabindex="0">
-          <div class="card__art card__art--latte" aria-hidden="true"></div>
-          <h3>Canopy Latte</h3>
-          <p>Velvet microfoam over our signature roast.</p>
-          <span class="card__price">$4.5</span>
-          <span class="card__pop" aria-hidden="true">+10 🫘</span>
-        </article>
-        <article class="card reveal" data-bean="10" tabindex="0">
-          <div class="card__art card__art--cold" aria-hidden="true"></div>
-          <h3>Cold Harvest Brew</h3>
-          <p>18-hour steeped, smooth &amp; naturally sweet.</p>
-          <span class="card__price">$4.0</span>
-          <span class="card__pop" aria-hidden="true">+10 🫘</span>
-        </article>
-        <article class="card reveal" data-bean="10" tabindex="0">
-          <div class="card__art card__art--mocha" aria-hidden="true"></div>
-          <h3>Soil &amp; Cocoa Mocha</h3>
-          <p>House roast folded into single-origin chocolate.</p>
-          <span class="card__price">$5.0</span>
-          <span class="card__pop" aria-hidden="true">+10 🫘</span>
-        </article>
+    <section class="section" id="menu">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">The Menu</span>
+          <h2>Our fresh menu.</h2>
+          <p>Grown on our hillside, roasted in small batches, and made to order. Prices in USD.</p>
+        </div>
+
+        <div class="menu__cat reveal">
+          <h3>Signature Coffee <span>our most-loved pours</span></h3>
+          <div class="dishes">
+            <button class="dish" style="--c:#C63E29"><span class="dish__art"></span><span class="dish__name">Hillside Espresso</span><span class="dish__tag">Intense, dark cocoa finish</span><span class="dish__row"><span class="dish__price">$3.5</span></span></button>
+            <button class="dish" style="--c:#EAAE3A"><span class="dish__art"></span><span class="dish__name">Canopy Latte</span><span class="dish__tag">Velvet microfoam, signature roast</span><span class="dish__row"><span class="dish__price">$4.5</span></span></button>
+            <button class="dish" style="--c:#9A6536"><span class="dish__art"></span><span class="dish__name">Cold Harvest Brew</span><span class="dish__tag">18-hour steep, naturally sweet</span><span class="dish__row"><span class="dish__price">$4.0</span></span></button>
+            <button class="dish" style="--c:#5A3A26"><span class="dish__art"></span><span class="dish__name">Soil &amp; Cocoa Mocha</span><span class="dish__tag">House roast + single-origin cocoa</span><span class="dish__row"><span class="dish__price">$5.0</span></span></button>
+          </div>
+        </div>
+
+        <div class="menu__cat reveal">
+          <h3>Milk &amp; More <span>creamy, fruity, fun</span></h3>
+          <div class="dishes">
+            <button class="dish" style="--c:#D8B486"><span class="dish__art"></span><span class="dish__name">Honey Oat Flat White</span><span class="dish__tag">Oat milk, wildflower honey</span><span class="dish__row"><span class="dish__price">$4.5</span></span></button>
+            <button class="dish" style="--c:#8458C9"><span class="dish__art"></span><span class="dish__name">Taro Cloud</span><span class="dish__tag">Stone-ground taro, light &amp; sweet</span><span class="dish__row"><span class="dish__price">$4.8</span></span></button>
+            <button class="dish" style="--c:#4F9D6B"><span class="dish__art"></span><span class="dish__name">Matcha Grove</span><span class="dish__tag">Ceremonial matcha latte</span><span class="dish__row"><span class="dish__price">$4.8</span></span></button>
+            <button class="dish" style="--c:#D85B86"><span class="dish__art"></span><span class="dish__name">Berry Bramble Foam</span><span class="dish__tag">Cold brew, berry cold foam</span><span class="dish__row"><span class="dish__price">$5.0</span></span></button>
+          </div>
+        </div>
+
+        <div class="pricelists reveal">
+          <div class="pricelist">
+            <h3>The Classic Bar</h3>
+            <ul>
+              <li><b>Americano</b><span class="lead"></span><span class="p">$3.0</span></li>
+              <li><b>Cortado</b><span class="lead"></span><span class="p">$3.5</span></li>
+              <li><b>Macchiato</b><span class="lead"></span><span class="p">$3.0</span></li>
+              <li><b>Single-origin pour-over</b><span class="lead"></span><span class="p">$4.5</span></li>
+              <li><b>Affogato</b><span class="lead"></span><span class="p">$5.5</span></li>
+            </ul>
+          </div>
+          <div class="pricelist">
+            <h3>Beans to Take Home</h3>
+            <ul>
+              <li><b>Hillside Reserve · 250g</b><span class="lead"></span><span class="p">$20</span></li>
+              <li><b>Canopy Blend · 250g</b><span class="lead"></span><span class="p">$16</span></li>
+              <li><b>Decaf Dusk · 250g</b><span class="lead"></span><span class="p">$16</span></li>
+              <li><b>Citrus Bloom · 250g</b><span class="lead"></span><span class="p">$19</span></li>
+              <li><b>Gift Trio (3 × 150g)</b><span class="lead"></span><span class="p">$42</span></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- SOCIAL PROOF (skill: Hero + Testimonials + CTA — social proof before CTA) -->
-    <section class="proof" id="reviews">
-      <div class="section-head reveal">
-        <p class="eyebrow">Loved Locally</p>
-        <h2>What the neighborhood says</h2>
-      </div>
-      <div class="proof__grid">
-        <figure class="quote reveal">
-          <div class="quote__stars" aria-label="Rated 5 out of 5">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M11.5 1.6 14 7l5.9.5-4.5 3.9 1.4 5.8L11.5 14 6.2 17.2l1.4-5.8L3.1 7.5 9 7z"/></svg>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M11.5 1.6 14 7l5.9.5-4.5 3.9 1.4 5.8L11.5 14 6.2 17.2l1.4-5.8L3.1 7.5 9 7z"/></svg>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M11.5 1.6 14 7l5.9.5-4.5 3.9 1.4 5.8L11.5 14 6.2 17.2l1.4-5.8L3.1 7.5 9 7z"/></svg>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M11.5 1.6 14 7l5.9.5-4.5 3.9 1.4 5.8L11.5 14 6.2 17.2l1.4-5.8L3.1 7.5 9 7z"/></svg>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M11.5 1.6 14 7l5.9.5-4.5 3.9 1.4 5.8L11.5 14 6.2 17.2l1.4-5.8L3.1 7.5 9 7z"/></svg>
+    <!-- FLAVOURS -->
+    <section class="section flavours" id="flavours">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">Whole Bean</span>
+          <h2>Take the hillside home.</h2>
+          <p>Our single-origin bags, roasted to order. Free local delivery over $30.</p>
+        </div>
+        <div class="fl-carousel reveal">
+          <div class="fl-track" id="flTrack">
+            <article class="fl-card" style="--c:#C63E29"><span class="fl-card__tag">Whole bean · 250g</span><span class="fl-card__sq"></span>
+              <div class="fl-card__art"><div class="fl-card__cup"><span class="lid"></span><span class="body"><b>TB</b></span></div></div>
+              <h3 class="fl-card__name">Hillside Reserve</h3>
+              <div class="fl-card__foot"><span class="dish__tag">Dark · cocoa &amp; molasses</span><span class="fl-card__price">$20</span></div>
+            </article>
+            <article class="fl-card" style="--c:#EAAE3A"><span class="fl-card__tag">Whole bean · 250g</span><span class="fl-card__sq"></span>
+              <div class="fl-card__art"><div class="fl-card__cup"><span class="lid"></span><span class="body"><b>TB</b></span></div></div>
+              <h3 class="fl-card__name">Canopy Blend</h3>
+              <div class="fl-card__foot"><span class="dish__tag">Medium · caramel &amp; nut</span><span class="fl-card__price">$16</span></div>
+            </article>
+            <article class="fl-card" style="--c:#E07B3A"><span class="fl-card__tag">Whole bean · 250g</span><span class="fl-card__sq"></span>
+              <div class="fl-card__art"><div class="fl-card__cup"><span class="lid"></span><span class="body"><b>TB</b></span></div></div>
+              <h3 class="fl-card__name">Citrus Bloom</h3>
+              <div class="fl-card__foot"><span class="dish__tag">Light · bright &amp; floral</span><span class="fl-card__price">$19</span></div>
+            </article>
+            <article class="fl-card" style="--c:#5A3A26"><span class="fl-card__tag">Whole bean · 250g</span><span class="fl-card__sq"></span>
+              <div class="fl-card__art"><div class="fl-card__cup"><span class="lid"></span><span class="body"><b>TB</b></span></div></div>
+              <h3 class="fl-card__name">Cocoa Dusk</h3>
+              <div class="fl-card__foot"><span class="dish__tag">Dark · rich &amp; smooth</span><span class="fl-card__price">$18</span></div>
+            </article>
+            <article class="fl-card" style="--c:#8458C9"><span class="fl-card__tag">Whole bean · 250g</span><span class="fl-card__sq"></span>
+              <div class="fl-card__art"><div class="fl-card__cup"><span class="lid"></span><span class="body"><b>TB</b></span></div></div>
+              <h3 class="fl-card__name">Decaf Dusk</h3>
+              <div class="fl-card__foot"><span class="dish__tag">Decaf · gentle &amp; round</span><span class="fl-card__price">$16</span></div>
+            </article>
           </div>
-          <blockquote>You can taste the hillside in every cup. The single-origin pour-over ruined every other coffee for me.</blockquote>
-          <figcaption class="quote__by">
-            <span class="quote__avatar" aria-hidden="true">MR</span>
-            <span><strong>Maya R.</strong><br />Regular since 2019</span>
-          </figcaption>
-        </figure>
-        <figure class="quote reveal">
-          <div class="quote__stars" aria-label="Rated 5 out of 5">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M11.5 1.6 14 7l5.9.5-4.5 3.9 1.4 5.8L11.5 14 6.2 17.2l1.4-5.8L3.1 7.5 9 7z"/></svg>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M11.5 1.6 14 7l5.9.5-4.5 3.9 1.4 5.8L11.5 14 6.2 17.2l1.4-5.8L3.1 7.5 9 7z"/></svg>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M11.5 1.6 14 7l5.9.5-4.5 3.9 1.4 5.8L11.5 14 6.2 17.2l1.4-5.8L3.1 7.5 9 7z"/></svg>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M11.5 1.6 14 7l5.9.5-4.5 3.9 1.4 5.8L11.5 14 6.2 17.2l1.4-5.8L3.1 7.5 9 7z"/></svg>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M11.5 1.6 14 7l5.9.5-4.5 3.9 1.4 5.8L11.5 14 6.2 17.2l1.4-5.8L3.1 7.5 9 7z"/></svg>
+          <div class="fl-nav">
+            <button class="fl-btn" id="flPrev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
+            <button class="fl-btn" id="flNext" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
           </div>
-          <blockquote>Knowing they grow and roast it themselves makes the Canopy Latte feel like a little ritual. Staff know my order by heart.</blockquote>
-          <figcaption class="quote__by">
-            <span class="quote__avatar" aria-hidden="true">DT</span>
-            <span><strong>Daniel T.</strong><br />Neighborhood barista-spotter</span>
-          </figcaption>
-        </figure>
-        <figure class="quote reveal">
-          <div class="quote__stars" aria-label="Rated 5 out of 5">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M11.5 1.6 14 7l5.9.5-4.5 3.9 1.4 5.8L11.5 14 6.2 17.2l1.4-5.8L3.1 7.5 9 7z"/></svg>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M11.5 1.6 14 7l5.9.5-4.5 3.9 1.4 5.8L11.5 14 6.2 17.2l1.4-5.8L3.1 7.5 9 7z"/></svg>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M11.5 1.6 14 7l5.9.5-4.5 3.9 1.4 5.8L11.5 14 6.2 17.2l1.4-5.8L3.1 7.5 9 7z"/></svg>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M11.5 1.6 14 7l5.9.5-4.5 3.9 1.4 5.8L11.5 14 6.2 17.2l1.4-5.8L3.1 7.5 9 7z"/></svg>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M11.5 1.6 14 7l5.9.5-4.5 3.9 1.4 5.8L11.5 14 6.2 17.2l1.4-5.8L3.1 7.5 9 7z"/></svg>
-          </div>
-          <blockquote>The Cold Harvest Brew is unreal — smooth, naturally sweet, zero bitterness. Worth the trip across town.</blockquote>
-          <figcaption class="quote__by">
-            <span class="quote__avatar" aria-hidden="true">SL</span>
-            <span><strong>Sofia L.</strong><br />Weekend regular</span>
-          </figcaption>
-        </figure>
+        </div>
       </div>
     </section>
 
-    <!-- CTA / VISIT -->
+    <!-- REVIEWS -->
+    <section class="section" id="reviews">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">Loved Locally</span>
+          <h2>What the neighborhood says.</h2>
+        </div>
+        <div class="proof__grid">
+          <figure class="quote reveal">
+            <div class="quote__stars" aria-label="Rated 5 out of 5">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.5 1.6 14 7l5.9.5-4.5 3.9 1.4 5.8L11.5 14 6.2 17.2l1.4-5.8L3.1 7.5 9 7z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.5 1.6 14 7l5.9.5-4.5 3.9 1.4 5.8L11.5 14 6.2 17.2l1.4-5.8L3.1 7.5 9 7z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.5 1.6 14 7l5.9.5-4.5 3.9 1.4 5.8L11.5 14 6.2 17.2l1.4-5.8L3.1 7.5 9 7z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.5 1.6 14 7l5.9.5-4.5 3.9 1.4 5.8L11.5 14 6.2 17.2l1.4-5.8L3.1 7.5 9 7z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.5 1.6 14 7l5.9.5-4.5 3.9 1.4 5.8L11.5 14 6.2 17.2l1.4-5.8L3.1 7.5 9 7z"/></svg>
+            </div>
+            <blockquote>You can taste the hillside in every cup. The single-origin pour-over ruined every other coffee for me.</blockquote>
+            <figcaption class="quote__by"><span class="quote__avatar" aria-hidden="true">MR</span><span><strong>Maya R.</strong><br />Regular since 2019</span></figcaption>
+          </figure>
+          <figure class="quote reveal">
+            <div class="quote__stars" aria-label="Rated 5 out of 5">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.5 1.6 14 7l5.9.5-4.5 3.9 1.4 5.8L11.5 14 6.2 17.2l1.4-5.8L3.1 7.5 9 7z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.5 1.6 14 7l5.9.5-4.5 3.9 1.4 5.8L11.5 14 6.2 17.2l1.4-5.8L3.1 7.5 9 7z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.5 1.6 14 7l5.9.5-4.5 3.9 1.4 5.8L11.5 14 6.2 17.2l1.4-5.8L3.1 7.5 9 7z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.5 1.6 14 7l5.9.5-4.5 3.9 1.4 5.8L11.5 14 6.2 17.2l1.4-5.8L3.1 7.5 9 7z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.5 1.6 14 7l5.9.5-4.5 3.9 1.4 5.8L11.5 14 6.2 17.2l1.4-5.8L3.1 7.5 9 7z"/></svg>
+            </div>
+            <blockquote>Knowing they grow and roast it themselves makes the Canopy Latte feel like a little ritual. Staff know my order by heart.</blockquote>
+            <figcaption class="quote__by"><span class="quote__avatar" aria-hidden="true">DT</span><span><strong>Daniel T.</strong><br />Neighborhood regular</span></figcaption>
+          </figure>
+          <figure class="quote reveal">
+            <div class="quote__stars" aria-label="Rated 5 out of 5">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.5 1.6 14 7l5.9.5-4.5 3.9 1.4 5.8L11.5 14 6.2 17.2l1.4-5.8L3.1 7.5 9 7z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.5 1.6 14 7l5.9.5-4.5 3.9 1.4 5.8L11.5 14 6.2 17.2l1.4-5.8L3.1 7.5 9 7z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.5 1.6 14 7l5.9.5-4.5 3.9 1.4 5.8L11.5 14 6.2 17.2l1.4-5.8L3.1 7.5 9 7z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.5 1.6 14 7l5.9.5-4.5 3.9 1.4 5.8L11.5 14 6.2 17.2l1.4-5.8L3.1 7.5 9 7z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.5 1.6 14 7l5.9.5-4.5 3.9 1.4 5.8L11.5 14 6.2 17.2l1.4-5.8L3.1 7.5 9 7z"/></svg>
+            </div>
+            <blockquote>The Cold Harvest Brew is unreal: smooth, naturally sweet, zero bitterness. Worth the trip across town.</blockquote>
+            <figcaption class="quote__by"><span class="quote__avatar" aria-hidden="true">SL</span><span><strong>Sofia L.</strong><br />Weekend regular</span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISIT -->
     <section class="visit" id="visit">
-      <div class="visit__inner reveal">
-        <h2>Come taste the hillside</h2>
-        <p>Open daily · 7am – 6pm · 14 Grove Lane, Old Mill District</p>
-        <a href="#hero" class="btn btn--primary" id="finalCta">Reserve a Table</a>
-        <p class="visit__score">Beans harvested today: <strong id="finalScore">0</strong></p>
+      <div class="wrap">
+        <div class="visit__inner reveal">
+          <span class="eyebrow" style="color:#f2a07d;justify-content:center;">Come say hi</span>
+          <h2>Come taste the hillside.</h2>
+          <p>Open daily · 7am to 6pm · 14 Grove Lane, Old Mill District</p>
+          <a href="mailto:hello@terrabean.cafe" class="btn btn--primary">Reserve a table</a>
+        </div>
       </div>
     </section>
   </main>
 
   <footer class="footer">
-    <p>© <span id="year"></span> TerraBean Cafe — grown, roasted &amp; brewed by us.</p>
-    <p class="footer__credit">A gamified farm-to-cup experience.</p>
+    <span class="brand"><span class="brand__bean" aria-hidden="true"></span> TerraBean</span>
+    <p>© <span id="year">2026</span> TerraBean Cafe. Grown, roasted &amp; brewed by us.</p>
+    <p class="footer__credit">14 Grove Lane, Old Mill District · hello@terrabean.cafe</p>
   </footer>
 
-  <script src="script.js"></script>
-  <script src="rail.js"></script>
+  <script src="script.js?v=1"></script>
 </body>
 </html>

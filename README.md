@@ -1,20 +1,20 @@
 # TerraBean Cafe
 
-A gamified, single-page website for a local cafe that grows its own coffee beans.
+A warm, bold single-page storefront for a local cafe that grows, roasts, and brews its own coffee.
 
-- Dark coffee-bean color theme
-- 60fps, GPU-friendly scroll animations (transform/opacity only)
-- Gamified bean economy: harvest beans by scrolling, navigating the Bean Journey rail, and tapping menu drinks; unlock achievements
-- 3D "focus rail" carousel in the Bean Journey section (drag / scroll / keyboard / buttons)
-- No build step — pure HTML, CSS, and vanilla JS
+- Cream canvas, heavy display type (Bricolage Grotesque + Hanken Grotesk), vivid orange accent
+- Cinematic glowing coffee-bean preloader with a reveal
+- Hero with a CSS-built cup product, animated steam, floating beans, and count-up stats
+- "Our Fresh Menu" with colorful drink cards and dotted price lists
+- Whole-bean flavours carousel, local reviews, and a visit CTA
+- No build step, no images, no runtime dependencies. Pure HTML, CSS, vanilla JS.
 
 ## Run locally
 
-Just open `index.html` in a browser.
+Open `index.html` in a browser.
 
 ## Files
 
-- `index.html` — markup
-- `styles.css` — coffee-bean theme + animations
-- `script.js` — gamification engine (bean counter, achievements, scroll effects)
-- `rail.js` — Bean Journey focus-rail carousel
+- `index.html`: markup
+- `styles.css`: warm theme, layout, animations
+- `script.js`: preloader, reveals, count-up, nav, carousel
